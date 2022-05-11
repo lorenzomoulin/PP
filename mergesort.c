@@ -33,13 +33,9 @@ void *sort(void *arg){
 	int n = tdata->n;
 	int *arr = tdata->arr;
 	int id = tdata->id;
-	//printf("id = %d\n", id);
-	//fflush(stdin);
+	printf("Thread %d - Tamanho do segmento = %d\n", id, n);
+	fflush(stdin);
 	qsort(arr, n, sizeof(int), cmpfunc);
-	/*for (int i = 0; i < n; ++i)
-		printf("%d-%d\n",id,  arr[i]);
-	printf("----------\n");
-	fflush(stdin);*/
 	pthread_exit(NULL);
 }
 
@@ -54,7 +50,6 @@ int main(int argc, char **argv){
 	
 	int n = atoi(argv[1]);
 	int *c = gen(n, atoi(argv[3]));	
-	clock_t begin = clock();
 	int k = atoi(argv[2]);
 	int sz = n/k;
 	int r = n % k;
@@ -84,11 +79,5 @@ int main(int argc, char **argv){
 		if (next & 1) next = next/2 +1;
 		else next /= 2;
 	}
-	clock_t end = clock();
-	double time_spent = (double) (end - begin)/ CLOCKS_PER_SEC;
-	printf("tempo total = %.2lfs com n = %d e k = %d\n", time_spent, n, k);
-	/*for (int j = 0; j < n; ++j){
-		printf("%d\n", tdata[0].arr[j]);
-	}*/
 	return 0;
 }
